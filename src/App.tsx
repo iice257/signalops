@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   Activity,
   AlertTriangle,
@@ -10,6 +10,7 @@ import {
   Clock,
   FileText,
   Filter,
+  GitBranch,
   Loader2,
   Pause,
   Play,
@@ -46,6 +47,16 @@ const severityLabel: Record<Severity, string> = {
   low: "Low",
 };
 
+type LiveRepoSignal = {
+  branch: string;
+  openIssues: number;
+  pushedAt: string;
+  repo: string;
+  stars: number;
+  status: "loading" | "online" | "fallback";
+  url: string;
+};
+
 function App() {
   const [selectedId, setSelectedId] = useState(incidents[0].id);
   const [activeSources, setActiveSources] = useState<Record<SourceKey, boolean>>({
@@ -57,8 +68,71 @@ function App() {
   const [running, setRunning] = useState(false);
   const [approved, setApproved] = useState(false);
   const [sort, setSort] = useState<"risk" | "age">("risk");
+  const [liveRepoSignal, setLiveRepoSignal] = useState<LiveRepoSignal>({
+    branch: "main",
+    openIssues: 0,
+    pushedAt: "pending",
+    repo: "iice257/signalops",
+    stars: 0,
+    status: "loading",
+    url: "https://github.com/iice257/signalops",
+  });
 
   const selected = incidents.find((incident) => incident.id === selectedId) ?? incidents[0];
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    async function loadRepoSignal() {
+      try {
+        const response = await fetch("https://api.github.com/repos/iice257/signalops", {
+          signal: controller.signal,
+        });
+
+        if (!response.ok) {
+          throw new Error(`GitHub returned ${response.status}`);
+        }
+
+        const repo = (await response.json()) as {
+          default_branch: string;
+          full_name: string;
+          html_url: string;
+          open_issues_count: number;
+          pushed_at: string;
+          stargazers_count: number;
+        };
+
+        setLiveRepoSignal({
+          branch: repo.default_branch,
+          openIssues: repo.open_issues_count,
+          pushedAt: new Intl.DateTimeFormat(undefined, {
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+            month: "short",
+          }).format(new Date(repo.pushed_at)),
+          repo: repo.full_name,
+          stars: repo.stargazers_count,
+          status: "online",
+          url: repo.html_url,
+        });
+      } catch (error) {
+        if (controller.signal.aborted) {
+          return;
+        }
+
+        setLiveRepoSignal((current) => ({
+          ...current,
+          pushedAt: "cached",
+          status: "fallback",
+        }));
+      }
+    }
+
+    void loadRepoSignal();
+
+    return () => controller.abort();
+  }, []);
 
   const visibleIncidents = useMemo(() => {
     return incidents
@@ -130,7 +204,7 @@ function App() {
             sort={sort}
           />
           <IncidentDetail approved={approved} incident={selected} running={running} setApproved={setApproved} />
-          <Inspector incident={selected} running={running} />
+          <Inspector incident={selected} liveRepoSignal={liveRepoSignal} running={running} />
         </section>
 
         <LiveLog running={running} />
@@ -337,7 +411,15 @@ function IncidentDetail({
   );
 }
 
-function Inspector({ incident, running }: { incident: Incident; running: boolean }) {
+function Inspector({
+  incident,
+  liveRepoSignal,
+  running,
+}: {
+  incident: Incident;
+  liveRepoSignal: LiveRepoSignal;
+  running: boolean;
+}) {
   return (
     <aside className="inspector-panel" aria-label="Incident inspector">
       <div className="panel-header compact">
@@ -359,6 +441,35 @@ function Inspector({ incident, running }: { incident: Incident; running: boolean
           <span>{incident.confidence}%</span>
         </div>
       </div>
+
+      <section className="live-source-card">
+        <div className="section-label">
+          <GitBranch size={15} />
+          <span>Live repo signal</span>
+        </div>
+        <div className="source-health">
+          <strong>{liveRepoSignal.repo}</strong>
+          <small className={liveRepoSignal.status}>{liveRepoSignal.status}</small>
+        </div>
+        <dl>
+          <div>
+            <dt>Branch</dt>
+            <dd>{liveRepoSignal.branch}</dd>
+          </div>
+          <div>
+            <dt>Open issues</dt>
+            <dd>{liveRepoSignal.openIssues}</dd>
+          </div>
+          <div>
+            <dt>Stars</dt>
+            <dd>{liveRepoSignal.stars}</dd>
+          </div>
+          <div>
+            <dt>Last push</dt>
+            <dd>{liveRepoSignal.pushedAt}</dd>
+          </div>
+        </dl>
+      </section>
 
       <section className="connector-stack">
         <h3>MCP sources</h3>

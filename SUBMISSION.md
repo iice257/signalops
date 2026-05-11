@@ -31,19 +31,27 @@ SignalOps gives operators a structured AI workspace:
 
 ### Google Cloud Rapid Agent
 
-Use Gemini for agent planning, hypothesis generation, and remediation drafting. Connect one partner MCP source as the first real ingestion path.
+Use Gemini for agent planning, hypothesis generation, and remediation drafting. Connect one required partner MCP source. Best current partner fit: GitLab for repo/MR/CI evidence or Elastic for logs/APM evidence.
 
 ### Splunk Agentic Ops
 
-Map Splunk notable events and SPL query results into the incident queue, then have the agent summarize blast radius and suggested response.
+Map Splunk notable events and SPL query results into the incident queue, then have the agent summarize blast radius and suggested response. Public requirements are not fully posted yet, so keep this as a prepared track until the rules open.
 
 ### Bright Data
 
-Use external web intelligence for vendor advisories, status-page signals, public CVE context, and public exploit/noise validation.
+Use Bright Data MCP, SERP API, Web Unlocker, or Scraping Browser for vendor advisories, status-page signals, public CVE context, and public exploit/noise validation.
 
 ### Elastic / GitLab MCP
 
 GitLab supplies change context, ownership, MRs, and CI state. Elastic supplies logs, traces, and APM signals for confidence scoring.
+
+### DevNetwork AI + ML
+
+Submit SignalOps as an applied AI operations workflow, or adapt it to TrueFoundry's resilient-agent angle by demonstrating fallback behavior when an LLM, MCP server, or log provider is degraded.
+
+### TechEx / lablab
+
+Use SignalOps under Agent Security & AI Governance or Data & Intelligence. The fastest credible path is a Gemini-assisted governance agent that keeps remediation behind approval.
 
 ## What Is Built
 
@@ -53,6 +61,16 @@ GitLab supplies change context, ownership, MRs, and CI state. Elastic supplies l
 - Public GitHub repository and Vercel deployment.
 
 Live demo: https://signalops-orpin.vercel.app
+
+## Submission Assets Needed
+
+- Public repo: https://github.com/iice257/signalops
+- Hosted app: https://signalops-orpin.vercel.app
+- 1-3 minute demo video
+- Cover image
+- Optional slide deck
+- Explicit sponsor-tech proof section
+- Open-source license if a track requires it
 
 ## What Comes Next
 

@@ -740,6 +740,64 @@ button {
   margin-top: 13px;
 }
 
+.live-source-card {
+  margin-top: 13px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fbfcfd;
+  padding: 12px;
+}
+
+.source-health {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.source-health strong {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-size: 12px;
+}
+
+.source-health small {
+  border-radius: 999px;
+  padding: 3px 7px;
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.source-health small.loading,
+.source-health small.fallback {
+  color: var(--amber);
+  background: #fff0d1;
+}
+
+.source-health small.online {
+  color: var(--green);
+  background: #dff5ea;
+}
+
+.live-source-card dl {
+  margin: 10px 0 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.live-source-card dt {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.live-source-card dd {
+  margin: 3px 0 0;
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 800;
+}
+
 .connector-stack h3,
 .policy-stack h3 {
   margin: 0 0 8px;
