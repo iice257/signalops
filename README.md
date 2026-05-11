@@ -4,6 +4,8 @@ SignalOps is an agentic security and operations triage cockpit for teams that ne
 
 The prototype is built as a React/Vite interface for hackathon submission tracks around Google Cloud Rapid Agent, Splunk Agentic Ops, Bright Data, Elastic, and GitLab MCP workflows.
 
+Live demo: https://signalops-orpin.vercel.app
+
 ## What It Does
 
 - Ingests incident signals from repository, log, observability, and external advisory sources.
@@ -55,4 +57,3 @@ Replace the local sample data in `src/data.ts` with a thin agent service that ca
 2. Splunk or Elastic log query results.
 3. External advisory lookup.
 4. LLM-generated hypothesis and remediation draft.
-

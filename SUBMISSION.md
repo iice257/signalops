@@ -50,9 +50,10 @@ GitLab supplies change context, ownership, MRs, and CI state. Elastic supplies l
 - React/Vite prototype with realistic triage data.
 - Responsive desktop/mobile cockpit.
 - Interactive source filters, sorting, incident switching, agent run state, and approval state.
-- Public GitHub repository and GitHub Pages deployment workflow.
+- Public GitHub repository and Vercel deployment.
+
+Live demo: https://signalops-orpin.vercel.app
 
 ## What Comes Next
 
 The first production slice should connect GitHub or GitLab repository data, then one log source. The agent can then generate the hypothesis and remediation fields from real evidence rather than local sample data.
-
