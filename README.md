@@ -51,6 +51,7 @@ npm run build
 - DevNetwork AI + ML: position as an applied AI operations workflow with human approval controls.
 
 The FIND EVIL submission plan is in [FIND_EVIL_SUBMISSION.md](./FIND_EVIL_SUBMISSION.md).
+The Google Rapid Agent submission plan is in [GOOGLE_RAPID_AGENT_SUBMISSION.md](./GOOGLE_RAPID_AGENT_SUBMISSION.md).
 
 ## Next Implementation Step
 

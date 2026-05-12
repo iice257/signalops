@@ -33,6 +33,8 @@ SignalOps gives operators a structured AI workspace:
 
 Use Gemini for agent planning, hypothesis generation, and remediation drafting. Connect one required partner MCP source. Best current partner fit: GitLab for repo/MR/CI evidence or Elastic for logs/APM evidence.
 
+Dedicated submission plan: `GOOGLE_RAPID_AGENT_SUBMISSION.md`.
+
 ### Splunk Agentic Ops
 
 Map Splunk notable events and SPL query results into the incident queue, then have the agent summarize blast radius and suggested response. Public requirements are not fully posted yet, so keep this as a prepared track until the rules open.
