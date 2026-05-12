@@ -80,6 +80,7 @@ Live demo: https://signalops-orpin.vercel.app
 - 1-3 minute demo video
 - Cover image
 - Optional slide deck
+- Devpost copy from `DEVPOST_SUBMISSION_COPY.md`
 - Explicit sponsor-tech proof section
 - FIND EVIL evidence bundle, accuracy report, and agent execution log
 - Google Rapid Agent evidence bundle and Gemini triage-plan proof
