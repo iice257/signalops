@@ -2,7 +2,7 @@
 
 SignalOps is an agentic security and operations triage cockpit for teams that need fast, evidence-backed incident decisions without handing full control to an autonomous agent.
 
-The prototype is built as a React/Vite interface for hackathon submission tracks around Google Cloud Rapid Agent, Splunk Agentic Ops, Bright Data, Elastic, and GitLab MCP workflows.
+The prototype is built as a React/Vite interface for hackathon submission tracks around FIND EVIL, Google Cloud Rapid Agent, Splunk Agentic Ops, Bright Data, Elastic, and GitLab MCP workflows.
 
 Live demo: https://signalops-orpin.vercel.app
 
@@ -44,10 +44,13 @@ npm run build
 
 ## Hackathon Fit
 
+- FIND EVIL: use SignalOps as a defensive evidence triage cockpit with a prepared incident bundle, agent execution logs, accuracy notes, and a human approval gate.
 - Google Cloud Rapid Agent: adapt the agent plan/execution layer to Gemini and a partner MCP track.
 - Splunk Agentic Ops: connect the triage queue and evidence timeline to Splunk notable events and SPL queries.
 - Bright Data: enrich incident context with public advisories, vendor status pages, and external risk signals.
 - DevNetwork AI + ML: position as an applied AI operations workflow with human approval controls.
+
+The FIND EVIL submission plan is in [FIND_EVIL_SUBMISSION.md](./FIND_EVIL_SUBMISSION.md).
 
 ## Next Implementation Step
 

@@ -53,6 +53,10 @@ Submit SignalOps as an applied AI operations workflow, or adapt it to TrueFoundr
 
 Use SignalOps under Agent Security & AI Governance or Data & Intelligence. The fastest credible path is a Gemini-assisted governance agent that keeps remediation behind approval.
 
+### FIND EVIL
+
+Use SignalOps as a defensive evidence triage cockpit: load a prepared incident bundle, generate a timeline, show agent execution logs, compare the result with expected findings, and keep every risky action behind a human approval gate. The dedicated submission pack is in `FIND_EVIL_SUBMISSION.md`.
+
 ## What Is Built
 
 - React/Vite prototype with realistic triage data.
@@ -70,6 +74,7 @@ Live demo: https://signalops-orpin.vercel.app
 - Cover image
 - Optional slide deck
 - Explicit sponsor-tech proof section
+- FIND EVIL evidence bundle, accuracy report, and agent execution log
 - Open-source license if a track requires it
 
 ## What Comes Next
