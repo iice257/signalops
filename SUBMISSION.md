@@ -39,6 +39,8 @@ Dedicated submission plan: `GOOGLE_RAPID_AGENT_SUBMISSION.md`.
 
 Map Splunk notable events and SPL query results into the incident queue, then have the agent summarize blast radius and suggested response. Public requirements are not fully posted yet, so keep this as a prepared track until the rules open.
 
+Dedicated submission plan: `SPLUNK_AGENTIC_OPS_SUBMISSION.md`.
+
 ### Bright Data
 
 Use Bright Data MCP, SERP API, Web Unlocker, or Scraping Browser for vendor advisories, status-page signals, public CVE context, and public exploit/noise validation.
@@ -66,6 +68,7 @@ Use SignalOps as a defensive evidence triage cockpit: load a prepared incident b
 - Interactive source filters, sorting, incident switching, agent run state, and approval state.
 - FIND EVIL demo incident with public prepared evidence bundle and accuracy counts.
 - Google Rapid Agent proof slice with public GitLab/Elastic-style evidence bundle.
+- Splunk Agentic Ops proof slice with public notable-event bundle and SPL query plan.
 - Public GitHub repository and Vercel deployment.
 
 Live demo: https://signalops-orpin.vercel.app
@@ -80,6 +83,7 @@ Live demo: https://signalops-orpin.vercel.app
 - Explicit sponsor-tech proof section
 - FIND EVIL evidence bundle, accuracy report, and agent execution log
 - Google Rapid Agent evidence bundle and Gemini triage-plan proof
+- Splunk Agentic Ops notable event and SPL evidence proof
 - Open-source license if a track requires it
 
 ## What Comes Next

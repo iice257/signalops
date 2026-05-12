@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import {
   Activity,
   AlertTriangle,
@@ -69,71 +69,17 @@ function App() {
   const [running, setRunning] = useState(false);
   const [approved, setApproved] = useState(false);
   const [sort, setSort] = useState<"risk" | "age">("risk");
-  const [liveRepoSignal, setLiveRepoSignal] = useState<LiveRepoSignal>({
+  const [liveRepoSignal] = useState<LiveRepoSignal>({
     branch: "main",
     openIssues: 0,
-    pushedAt: "pending",
+    pushedAt: "deployed",
     repo: "iice257/signalops",
     stars: 0,
-    status: "loading",
+    status: "fallback",
     url: "https://github.com/iice257/signalops",
   });
 
   const selected = incidents.find((incident) => incident.id === selectedId) ?? incidents[0];
-
-  useEffect(() => {
-    const controller = new AbortController();
-
-    async function loadRepoSignal() {
-      try {
-        const response = await fetch("https://api.github.com/repos/iice257/signalops", {
-          signal: controller.signal,
-        });
-
-        if (!response.ok) {
-          throw new Error(`GitHub returned ${response.status}`);
-        }
-
-        const repo = (await response.json()) as {
-          default_branch: string;
-          full_name: string;
-          html_url: string;
-          open_issues_count: number;
-          pushed_at: string;
-          stargazers_count: number;
-        };
-
-        setLiveRepoSignal({
-          branch: repo.default_branch,
-          openIssues: repo.open_issues_count,
-          pushedAt: new Intl.DateTimeFormat(undefined, {
-            day: "2-digit",
-            hour: "2-digit",
-            minute: "2-digit",
-            month: "short",
-          }).format(new Date(repo.pushed_at)),
-          repo: repo.full_name,
-          stars: repo.stargazers_count,
-          status: "online",
-          url: repo.html_url,
-        });
-      } catch (error) {
-        if (controller.signal.aborted) {
-          return;
-        }
-
-        setLiveRepoSignal((current) => ({
-          ...current,
-          pushedAt: "cached",
-          status: "fallback",
-        }));
-      }
-    }
-
-    void loadRepoSignal();
-
-    return () => controller.abort();
-  }, []);
 
   const visibleIncidents = useMemo(() => {
     return incidents
@@ -448,7 +394,7 @@ function Inspector({
       <section className="live-source-card">
         <div className="section-label">
           <GitBranch size={15} />
-          <span>Live repo signal</span>
+          <span>Repo signal</span>
         </div>
         <div className="source-health">
           <strong>{liveRepoSignal.repo}</strong>
@@ -527,6 +473,30 @@ function Inspector({
             ))}
             <strong>Fallback</strong>
             <p>{incident.rapidAgent.fallbackNote}</p>
+          </div>
+        </section>
+      ) : null}
+
+      {incident.splunkOps ? (
+        <section className="splunk-ops-card">
+          <div className="section-label">
+            <TerminalSquare size={15} />
+            <span>Splunk Agentic Ops</span>
+          </div>
+          <a href={incident.splunkOps.evidenceUrl} rel="noreferrer" target="_blank">
+            {incident.splunkOps.notableEvent}
+          </a>
+          <div className="packet-list">
+            <strong>SPL evidence</strong>
+            {incident.splunkOps.splQueries.map((query) => (
+              <code key={query}>{query}</code>
+            ))}
+            <strong>Agent actions</strong>
+            {incident.splunkOps.agentActions.map((action) => (
+              <p key={action}>{action}</p>
+            ))}
+            <strong>Approval reason</strong>
+            <p>{incident.splunkOps.approvalReason}</p>
           </div>
         </section>
       ) : null}

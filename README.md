@@ -52,6 +52,7 @@ npm run build
 
 The FIND EVIL submission plan is in [FIND_EVIL_SUBMISSION.md](./FIND_EVIL_SUBMISSION.md).
 The Google Rapid Agent submission plan is in [GOOGLE_RAPID_AGENT_SUBMISSION.md](./GOOGLE_RAPID_AGENT_SUBMISSION.md).
+The Splunk Agentic Ops submission plan is in [SPLUNK_AGENTIC_OPS_SUBMISSION.md](./SPLUNK_AGENTIC_OPS_SUBMISSION.md).
 
 ## Next Implementation Step
 

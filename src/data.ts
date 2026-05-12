@@ -35,6 +35,14 @@ export type RapidAgentPacket = {
   fallbackNote: string;
 };
 
+export type SplunkOpsPacket = {
+  evidenceUrl: string;
+  notableEvent: string;
+  splQueries: string[];
+  agentActions: string[];
+  approvalReason: string;
+};
+
 export type Incident = {
   id: string;
   title: string;
@@ -52,6 +60,7 @@ export type Incident = {
   timeline?: TimelineStep[];
   findEvil?: FindEvilPacket;
   rapidAgent?: RapidAgentPacket;
+  splunkOps?: SplunkOpsPacket;
 };
 
 export type TimelineStep = {
@@ -256,6 +265,22 @@ export const incidents: Incident[] = [
       "Invalidate generated URLs older than 15 minutes.",
       "Backfill audit events for affected exports.",
     ],
+    splunkOps: {
+      evidenceUrl: "/examples/splunk-agentic-ops/notable-event.json",
+      notableEvent: "SOC-771 support export ACL drift",
+      splQueries: [
+        'index=prod sourcetype=support_exports action="export.created" acl!="private"',
+        'index=prod sourcetype=policy_decisions policy="export_acl_guard" result="deny"',
+        'index=prod sourcetype=audit service="support-tools" route="/exports/*"',
+      ],
+      agentActions: [
+        "Summarize notable event and related policy denies.",
+        "Link export route change to affected customer accounts.",
+        "Draft containment steps without invalidating URLs until approved.",
+      ],
+      approvalReason:
+        "Export invalidation can disrupt support workflows, so the agent only prepares the action and waits for an operator.",
+    },
   },
   {
     id: "INC-4798",

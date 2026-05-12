@@ -1,0 +1,40 @@
+{
+  "dataset": "SignalOps Splunk Agentic Ops prepared notable event",
+  "version": "2026-05-12",
+  "notableEvent": {
+    "id": "SOC-771",
+    "title": "Support export ACL drift",
+    "severity": "high",
+    "source": "splunk",
+    "service": "support-tools",
+    "riskScore": 76
+  },
+  "splQueries": [
+    "index=prod sourcetype=support_exports action=\"export.created\" acl!=\"private\"",
+    "index=prod sourcetype=policy_decisions policy=\"export_acl_guard\" result=\"deny\"",
+    "index=prod sourcetype=audit service=\"support-tools\" route=\"/exports/*\""
+  ],
+  "evidence": [
+    {
+      "source": "support_exports",
+      "signal": "Generated CSV files inherited legacy public ACL in a narrow export path."
+    },
+    {
+      "source": "policy_decisions",
+      "signal": "Policy deny fired in production for export ACL guard."
+    },
+    {
+      "source": "audit",
+      "signal": "Export route changed during the deployment window."
+    }
+  ],
+  "agentActions": [
+    "Summarize the notable event and related policy denies.",
+    "Estimate blast radius from generated export IDs.",
+    "Draft containment while keeping URL invalidation behind human approval."
+  ],
+  "humanApproval": {
+    "required": true,
+    "reason": "Invalidating generated export URLs can interrupt support workflows."
+  }
+}

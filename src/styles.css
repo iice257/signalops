@@ -742,7 +742,8 @@ button {
 
 .live-source-card,
 .find-evil-card,
-.rapid-agent-card {
+.rapid-agent-card,
+.splunk-ops-card {
   margin-top: 13px;
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -804,7 +805,8 @@ button {
 }
 
 .find-evil-card a,
-.rapid-agent-card a {
+.rapid-agent-card a,
+.splunk-ops-card a {
   color: var(--teal-dark);
   font-size: 12px;
   font-weight: 800;
@@ -822,6 +824,18 @@ button {
   color: var(--muted);
   font-size: 12px;
   line-height: 1.42;
+}
+
+.packet-list code {
+  display: block;
+  border-radius: 6px;
+  background: #111827;
+  color: #e5f6f5;
+  font-size: 11px;
+  line-height: 1.45;
+  padding: 7px;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
 .packet-list strong {
