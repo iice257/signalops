@@ -65,6 +65,7 @@ Use SignalOps as a defensive evidence triage cockpit: load a prepared incident b
 - Responsive desktop/mobile cockpit.
 - Interactive source filters, sorting, incident switching, agent run state, and approval state.
 - FIND EVIL demo incident with public prepared evidence bundle and accuracy counts.
+- Google Rapid Agent proof slice with public GitLab/Elastic-style evidence bundle.
 - Public GitHub repository and Vercel deployment.
 
 Live demo: https://signalops-orpin.vercel.app
@@ -78,6 +79,7 @@ Live demo: https://signalops-orpin.vercel.app
 - Optional slide deck
 - Explicit sponsor-tech proof section
 - FIND EVIL evidence bundle, accuracy report, and agent execution log
+- Google Rapid Agent evidence bundle and Gemini triage-plan proof
 - Open-source license if a track requires it
 
 ## What Comes Next

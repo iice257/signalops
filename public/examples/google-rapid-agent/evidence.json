@@ -1,0 +1,46 @@
+{
+  "dataset": "SignalOps Google Rapid Agent prepared evidence bundle",
+  "version": "2026-05-12",
+  "partnerTrack": "GitLab MCP",
+  "summary": "Prepared evidence for a Gemini-assisted triage run around privilege-boundary drift in project invites.",
+  "geminiPlan": [
+    "Identify the changed authorization helper and deploy window.",
+    "Collect GitLab merge request, CI, and ownership context.",
+    "Cross-check policy logs before drafting remediation.",
+    "Keep rollback and customer-impact actions behind human approval."
+  ],
+  "partnerEvidence": [
+    {
+      "source": "gitlab",
+      "kind": "merge_request",
+      "id": "!3812",
+      "detail": "Role mapper change touched invite acceptance and billing-scope helpers."
+    },
+    {
+      "source": "gitlab",
+      "kind": "ci_pipeline",
+      "id": "pipe-88421",
+      "detail": "Canary deploy completed 12 minutes before the first high-risk event."
+    },
+    {
+      "source": "elastic",
+      "kind": "policy_log",
+      "id": "billing_scope_guard",
+      "detail": "Policy guard failed on invite acceptance for accounts created in the last 24 hours."
+    },
+    {
+      "source": "ownership",
+      "kind": "service_owner",
+      "id": "identity",
+      "detail": "Identity team owns accounts-api and can approve rollback."
+    }
+  ],
+  "humanApproval": {
+    "required": true,
+    "reason": "Rollback and permission changes can affect customer access, so SignalOps keeps execution guarded."
+  },
+  "fallbackPolicy": {
+    "degradedSource": "Elastic",
+    "behavior": "Preserve partial evidence, reduce confidence, and request analyst confirmation before remediation."
+  }
+}

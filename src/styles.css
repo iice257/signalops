@@ -741,7 +741,8 @@ button {
 }
 
 .live-source-card,
-.find-evil-card {
+.find-evil-card,
+.rapid-agent-card {
   margin-top: 13px;
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -802,7 +803,8 @@ button {
   font-weight: 800;
 }
 
-.find-evil-card a {
+.find-evil-card a,
+.rapid-agent-card a {
   color: var(--teal-dark);
   font-size: 12px;
   font-weight: 800;
@@ -820,6 +822,12 @@ button {
   color: var(--muted);
   font-size: 12px;
   line-height: 1.42;
+}
+
+.packet-list strong {
+  margin-top: 4px;
+  color: var(--ink);
+  font-size: 12px;
 }
 
 .connector-stack h3,

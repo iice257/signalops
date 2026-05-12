@@ -507,6 +507,30 @@ function Inspector({
         </section>
       ) : null}
 
+      {incident.rapidAgent ? (
+        <section className="rapid-agent-card">
+          <div className="section-label">
+            <Zap size={15} />
+            <span>Google Rapid Agent</span>
+          </div>
+          <a href={incident.rapidAgent.evidenceUrl} rel="noreferrer" target="_blank">
+            {incident.rapidAgent.partnerTrack} evidence bundle
+          </a>
+          <div className="packet-list">
+            <strong>Gemini triage plan</strong>
+            {incident.rapidAgent.geminiPlan.map((step) => (
+              <p key={step}>{step}</p>
+            ))}
+            <strong>Partner evidence</strong>
+            {incident.rapidAgent.partnerEvidence.map((item) => (
+              <p key={item}>{item}</p>
+            ))}
+            <strong>Fallback</strong>
+            <p>{incident.rapidAgent.fallbackNote}</p>
+          </div>
+        </section>
+      ) : null}
+
       <section className="connector-stack">
         <h3>MCP sources</h3>
         {connectors.map((connector) => (

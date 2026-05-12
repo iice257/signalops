@@ -25,6 +25,7 @@ Primary partner path: GitLab MCP or Elastic MCP.
 
 - Public repository: https://github.com/iice257/signalops
 - Live demo: https://signalops-orpin.vercel.app
+- Prepared evidence bundle: `public/examples/google-rapid-agent/evidence.json`
 - Demo video: about 3 minutes
 - Open-source license if required by the brief
 - Devpost submission with selected partner track
@@ -32,11 +33,11 @@ Primary partner path: GitLab MCP or Elastic MCP.
 
 ## Minimum Credible Build
 
-The live app already demonstrates the cockpit. To make the Rapid Agent submission stronger, add one of:
+The live app already demonstrates the cockpit. The current proof slice adds:
 
-1. A small deterministic `rapid-agent` adapter that loads a prepared GitLab/Elastic evidence JSON file.
-2. A Gemini prompt/export file showing the triage planner input and output.
-3. A report view that turns selected incident data into a submission-ready incident brief.
+1. A prepared GitLab/Elastic evidence JSON file.
+2. A Gemini triage plan shown in the inspector.
+3. Partner evidence and fallback policy surfaced in the UI.
 
 ## Sponsor Fit Copy
 
@@ -44,4 +45,4 @@ SignalOps shows how a rapid agent can help teams move from noisy alerts to evide
 
 ## Next Implementation Slice
 
-Add a public `examples/google-rapid-agent/evidence.json` bundle mirroring GitLab and Elastic evidence, then expose it in the inspector the same way the FIND EVIL packet is exposed.
+Add a report view that turns selected incident data into a submission-ready incident brief.

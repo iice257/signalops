@@ -27,6 +27,14 @@ export type FindEvilPacket = {
   executionLog: string[];
 };
 
+export type RapidAgentPacket = {
+  partnerTrack: "GitLab" | "Elastic";
+  evidenceUrl: string;
+  geminiPlan: string[];
+  partnerEvidence: string[];
+  fallbackNote: string;
+};
+
 export type Incident = {
   id: string;
   title: string;
@@ -43,6 +51,7 @@ export type Incident = {
   owner: string;
   timeline?: TimelineStep[];
   findEvil?: FindEvilPacket;
+  rapidAgent?: RapidAgentPacket;
 };
 
 export type TimelineStep = {
@@ -191,6 +200,22 @@ export const incidents: Incident[] = [
       "Add regression coverage for invite role downgrade.",
       "Pause rollout on accounts-api canary.",
     ],
+    rapidAgent: {
+      partnerTrack: "GitLab",
+      evidenceUrl: "/examples/google-rapid-agent/evidence.json",
+      geminiPlan: [
+        "Identify the deploy window and changed authorization helper.",
+        "Request GitLab MR, CI, and ownership evidence before drafting a fix.",
+        "Use Elastic-style policy logs to confirm the failed billing guard.",
+      ],
+      partnerEvidence: [
+        "GitLab MR !3812 changed role mapper logic.",
+        "CI canary deploy completed 12 minutes before the alert.",
+        "Policy event billing_scope_guard failed on invite acceptance.",
+      ],
+      fallbackNote:
+        "If GitLab or Elastic is degraded, preserve partial evidence, lower confidence, and require manual approval before remediation.",
+    },
   },
   {
     id: "INC-4817",
