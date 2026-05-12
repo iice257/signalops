@@ -1,0 +1,97 @@
+{
+  "dataset": "SignalOps FIND EVIL prepared evidence bundle",
+  "version": "2026-05-12",
+  "scope": "sanitized defensive demo data only",
+  "summary": "A helpdesk token appears in a new network context and is followed by privileged admin route reads plus a blocked export attempt.",
+  "records": [
+    {
+      "id": "evt-001",
+      "source": "identity",
+      "timestamp": "2026-05-12T18:03:14Z",
+      "actor": "helpdesk-analyst-04",
+      "action": "session.created",
+      "signal": "usual device fingerprint"
+    },
+    {
+      "id": "evt-002",
+      "source": "identity",
+      "timestamp": "2026-05-12T18:17:42Z",
+      "actor": "helpdesk-analyst-04",
+      "action": "session.created",
+      "signal": "new network ASN and region"
+    },
+    {
+      "id": "evt-003",
+      "source": "access",
+      "timestamp": "2026-05-12T18:18:03Z",
+      "actor": "helpdesk-analyst-04",
+      "action": "token.used",
+      "signal": "token hdp-742 reused from new session"
+    },
+    {
+      "id": "evt-004",
+      "source": "admin-audit",
+      "timestamp": "2026-05-12T18:19:19Z",
+      "actor": "helpdesk-analyst-04",
+      "action": "settings.billing.read",
+      "signal": "privileged route read"
+    },
+    {
+      "id": "evt-005",
+      "source": "admin-audit",
+      "timestamp": "2026-05-12T18:20:37Z",
+      "actor": "helpdesk-analyst-04",
+      "action": "users.export.requested",
+      "signal": "export action blocked by policy"
+    },
+    {
+      "id": "evt-006",
+      "source": "policy",
+      "timestamp": "2026-05-12T18:20:38Z",
+      "actor": "policy-engine",
+      "action": "approval.required",
+      "signal": "human gate stopped export"
+    },
+    {
+      "id": "evt-007",
+      "source": "endpoint",
+      "timestamp": "2026-05-12T18:21:01Z",
+      "actor": "managed-device-118",
+      "action": "device.health.checked",
+      "signal": "no unmanaged script execution found"
+    },
+    {
+      "id": "evt-008",
+      "source": "case",
+      "timestamp": "2026-05-12T18:23:44Z",
+      "actor": "signalops-agent",
+      "action": "timeline.generated",
+      "signal": "three expected findings matched"
+    },
+    {
+      "id": "evt-009",
+      "source": "case",
+      "timestamp": "2026-05-12T18:24:11Z",
+      "actor": "signalops-agent",
+      "action": "remediation.held",
+      "signal": "containment remains simulated until analyst approval"
+    }
+  ],
+  "expectedFindings": [
+    "Helpdesk token appears in a new network context.",
+    "Admin settings were read shortly after the new session.",
+    "Export action was attempted but blocked by policy."
+  ],
+  "accuracy": {
+    "expected": 3,
+    "matched": 3,
+    "missed": 0,
+    "falsePositives": 1,
+    "note": "The extra low-confidence enrichment is the endpoint health check. It is useful context but not part of the expected finding set."
+  },
+  "guardrails": [
+    "No third-party systems are accessed.",
+    "No secrets, personal data, customer data, or real tokens are included.",
+    "Every risky action is represented as a simulated approval state."
+  ]
+}

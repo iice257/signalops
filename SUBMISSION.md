@@ -62,6 +62,7 @@ Use SignalOps as a defensive evidence triage cockpit: load a prepared incident b
 - React/Vite prototype with realistic triage data.
 - Responsive desktop/mobile cockpit.
 - Interactive source filters, sorting, incident switching, agent run state, and approval state.
+- FIND EVIL demo incident with public prepared evidence bundle and accuracy counts.
 - Public GitHub repository and Vercel deployment.
 
 Live demo: https://signalops-orpin.vercel.app

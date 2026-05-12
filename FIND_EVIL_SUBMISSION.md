@@ -43,6 +43,7 @@ flowchart LR
 
 - Public repository: https://github.com/iice257/signalops
 - Live demo: https://signalops-orpin.vercel.app
+- Prepared evidence bundle: `public/examples/find-evil/evidence.json`
 - Demo video: 3 to 5 minutes
 - Architecture diagram: the flow above or a polished PNG version
 - Dataset documentation: evidence source, schema, sanitization note, expected findings
@@ -67,6 +68,12 @@ flowchart LR
 - Do not include secrets, tokens, customer data, or personal data in examples.
 - Keep all risky actions in the UI as simulated approval states unless the target environment is explicitly owned and isolated.
 
+## Implemented Slice
+
+- The React incident queue includes a `FE-001` FIND EVIL demo incident.
+- The inspector shows the evidence packet, expected findings, and accuracy counts.
+- The public bundle is served from `/examples/find-evil/evidence.json`.
+
 ## Next Implementation Slice
 
-The next code slice should add a `findEvil` demo dataset and a deterministic adapter. That gives the submission real evidence flow without needing live infrastructure credentials.
+The next code slice should add a deterministic parser that reads the JSON bundle at runtime and maps it into SignalOps incident records. The current implementation keeps the record in the UI data module so the demo stays dependency-light and reliable.

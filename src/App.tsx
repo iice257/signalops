@@ -60,6 +60,7 @@ type LiveRepoSignal = {
 function App() {
   const [selectedId, setSelectedId] = useState(incidents[0].id);
   const [activeSources, setActiveSources] = useState<Record<SourceKey, boolean>>({
+    sift: true,
     gitlab: true,
     elastic: true,
     splunk: true,
@@ -335,6 +336,8 @@ function IncidentDetail({
   running: boolean;
   setApproved: (next: boolean) => void;
 }) {
+  const activeTimeline = incident.timeline ?? timeline;
+
   return (
     <section className="detail-panel" aria-label="Selected incident">
       <div className="panel-header">
@@ -364,7 +367,7 @@ function IncidentDetail({
       </div>
 
       <div className="timeline">
-        {timeline.map((step) => {
+        {activeTimeline.map((step) => {
           const Icon = step.icon;
           return (
             <div className={`timeline-step ${step.state}`} key={step.label}>
@@ -470,6 +473,39 @@ function Inspector({
           </div>
         </dl>
       </section>
+
+      {incident.findEvil ? (
+        <section className="find-evil-card">
+          <div className="section-label">
+            <FileText size={15} />
+            <span>FIND EVIL packet</span>
+          </div>
+          <a href={incident.findEvil.evidenceUrl} rel="noreferrer" target="_blank">
+            {incident.findEvil.dataset}
+          </a>
+          <dl>
+            <div>
+              <dt>Matched</dt>
+              <dd>
+                {incident.findEvil.accuracy.matched}/{incident.findEvil.accuracy.expected}
+              </dd>
+            </div>
+            <div>
+              <dt>Missed</dt>
+              <dd>{incident.findEvil.accuracy.missed}</dd>
+            </div>
+            <div>
+              <dt>Extra notes</dt>
+              <dd>{incident.findEvil.accuracy.falsePositives}</dd>
+            </div>
+          </dl>
+          <div className="packet-list">
+            {incident.findEvil.expectedFindings.map((finding) => (
+              <p key={finding}>{finding}</p>
+            ))}
+          </div>
+        </section>
+      ) : null}
 
       <section className="connector-stack">
         <h3>MCP sources</h3>

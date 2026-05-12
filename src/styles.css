@@ -740,7 +740,8 @@ button {
   margin-top: 13px;
 }
 
-.live-source-card {
+.live-source-card,
+.find-evil-card {
   margin-top: 13px;
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -779,23 +780,46 @@ button {
   background: #dff5ea;
 }
 
-.live-source-card dl {
+.live-source-card dl,
+.find-evil-card dl {
   margin: 10px 0 0;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 8px;
 }
 
-.live-source-card dt {
+.live-source-card dt,
+.find-evil-card dt {
   color: var(--muted);
   font-size: 11px;
 }
 
-.live-source-card dd {
+.live-source-card dd,
+.find-evil-card dd {
   margin: 3px 0 0;
   color: var(--ink);
   font-size: 12px;
   font-weight: 800;
+}
+
+.find-evil-card a {
+  color: var(--teal-dark);
+  font-size: 12px;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+.packet-list {
+  margin-top: 10px;
+  display: grid;
+  gap: 6px;
+}
+
+.packet-list p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.42;
 }
 
 .connector-stack h3,

@@ -12,7 +12,20 @@ import {
 import type { LucideIcon } from "lucide-react";
 
 export type Severity = "critical" | "high" | "medium" | "low";
-export type SourceKey = "gitlab" | "elastic" | "splunk" | "web";
+export type SourceKey = "gitlab" | "elastic" | "splunk" | "web" | "sift";
+
+export type FindEvilPacket = {
+  dataset: string;
+  evidenceUrl: string;
+  expectedFindings: string[];
+  accuracy: {
+    expected: number;
+    matched: number;
+    missed: number;
+    falsePositives: number;
+  };
+  executionLog: string[];
+};
 
 export type Incident = {
   id: string;
@@ -28,6 +41,8 @@ export type Incident = {
   hypothesis: string;
   remediation: string[];
   owner: string;
+  timeline?: TimelineStep[];
+  findEvil?: FindEvilPacket;
 };
 
 export type TimelineStep = {
@@ -47,6 +62,14 @@ export type Connector = {
 };
 
 export const connectors: Connector[] = [
+  {
+    key: "sift",
+    label: "Protocol SIFT",
+    status: "online",
+    latency: "local",
+    coverage: "Evidence, findings",
+    icon: SearchCheck,
+  },
   {
     key: "gitlab",
     label: "GitLab MCP",
@@ -82,6 +105,73 @@ export const connectors: Connector[] = [
 ];
 
 export const incidents: Incident[] = [
+  {
+    id: "FE-001",
+    title: "Suspicious admin session in prepared evidence bundle",
+    service: "find-evil-lab",
+    severity: "critical",
+    source: "sift",
+    age: "demo",
+    status: "investigating",
+    confidence: 88,
+    riskScore: 90,
+    owner: "DFIR",
+    signals: ["Impossible travel pattern", "Helpdesk token reuse", "Privileged settings touched"],
+    hypothesis:
+      "The prepared evidence suggests a helpdesk token was reused from a new network context, followed by administrative setting reads and an attempted export action.",
+    remediation: [
+      "Preserve the account, session, and audit evidence bundle.",
+      "Invalidate the affected helpdesk token and require step-up verification.",
+      "Open a human-reviewed case note before any containment automation runs.",
+    ],
+    timeline: [
+      {
+        label: "Load evidence bundle",
+        detail: "Parsed sanitized auth, audit, and endpoint records from examples/find-evil/evidence.json.",
+        state: "done",
+        icon: SearchCheck,
+      },
+      {
+        label: "Correlate identity context",
+        detail: "Matched the new network location to a helpdesk token and privileged admin route access.",
+        state: "done",
+        icon: Braces,
+      },
+      {
+        label: "Compare expected findings",
+        detail: "Scoring timeline output against known findings before exporting the analyst report.",
+        state: "active",
+        icon: AlertTriangle,
+      },
+      {
+        label: "Hold remediation",
+        detail: "Containment stays simulated until a human analyst approves the final case record.",
+        state: "queued",
+        icon: ShieldCheck,
+      },
+    ],
+    findEvil: {
+      dataset: "Prepared FIND EVIL demo bundle",
+      evidenceUrl: "/examples/find-evil/evidence.json",
+      expectedFindings: [
+        "Helpdesk token appears in a new network context.",
+        "Admin settings were read shortly after the new session.",
+        "Export action was attempted but blocked by policy.",
+      ],
+      accuracy: {
+        expected: 3,
+        matched: 3,
+        missed: 0,
+        falsePositives: 1,
+      },
+      executionLog: [
+        "bundle: loaded 9 sanitized evidence records",
+        "identity: correlated token hdp-742 with admin route reads",
+        "policy: export attempt blocked by approval gate",
+        "report: generated timeline with one low-confidence enrichment note",
+      ],
+    },
+  },
   {
     id: "INC-4829",
     title: "Privilege boundary drift in project invites",
