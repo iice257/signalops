@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">SignalOps</title>
+  <desc id="desc">Operational signal dashboard preview.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#020617"/>
+      <stop offset="1" stop-color="#134e4a"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="80" y="82" width="1040" height="466" rx="28" fill="#0f172a" opacity="0.9"/>
+  <text x="132" y="178" fill="#f8fafc" font-family="Inter, Arial, sans-serif" font-size="64" font-weight="800">SignalOps</text>
+  <text x="136" y="230" fill="#99f6e4" font-family="Inter, Arial, sans-serif" font-size="28">Monitor. Triage. Respond.</text>
+  <g fill="none" stroke-linecap="round" stroke-width="10">
+    <path d="M150 398h110l48-98 74 170 62-116h112" stroke="#2dd4bf"/>
+    <path d="M642 398h82l40-72 54 112 58-86h170" stroke="#facc15"/>
+  </g>
+  <g fill="#1e293b">
+    <rect x="138" y="282" width="222" height="72" rx="16"/>
+    <rect x="430" y="282" width="222" height="72" rx="16"/>
+    <rect x="722" y="282" width="222" height="72" rx="16"/>
+  </g>
+  <text x="162" y="328" fill="#cbd5e1" font-family="Inter, Arial, sans-serif" font-size="26">Signals</text>
+  <text x="454" y="328" fill="#cbd5e1" font-family="Inter, Arial, sans-serif" font-size="26">Incidents</text>
+  <text x="746" y="328" fill="#cbd5e1" font-family="Inter, Arial, sans-serif" font-size="26">Health</text>
+  <circle cx="1030" cy="164" r="44" fill="#2dd4bf"/>
+  <path d="M1010 164h40M1030 144v40" stroke="#020617" stroke-width="10" stroke-linecap="round"/>
+</svg>
